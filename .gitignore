@@ -7,3 +7,6 @@ undefined
 target
 *.log
 uitest-resources/
+test-resources/
+.vscode/
+.test-extensions/
