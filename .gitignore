@@ -5,6 +5,5 @@ node_modules
 .vscode-test
 undefined
 target
-.scannerwork
 *.log
 uitest-resources/

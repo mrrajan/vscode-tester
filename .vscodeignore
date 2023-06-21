@@ -1,0 +1,8 @@
+**/*.ts
+*.vsix
+.gitignore
+.vscode/**
+tsconfig.json
+tslint.json
+Contributing.md
+uitest-resources
