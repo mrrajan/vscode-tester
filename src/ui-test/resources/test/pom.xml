@@ -57,7 +57,7 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-jdbc-postgresql</artifactId>
-			<version>2.13.6.Final</version>
+			<version>2.16.7.Final</version>
 		</dependency>
 	</dependencies>
 
