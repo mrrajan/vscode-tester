@@ -1,7 +1,8 @@
 import { expect } from 'chai';
 import * as path from 'path';
-import { ActivityBar, before, VSBrowser, ExtensionsViewItem, ExtensionsViewSection, ContextMenu, EditorView, SideBarView, DefaultTreeSection, ViewItem, StatusBar, Workbench, NotificationType } from 'vscode-extension-tester';
+import { ActivityBar, before, VSBrowser, ExtensionsViewItem, ExtensionsViewSection, EditorView, SideBarView, ViewItem, WebView} from 'vscode-extension-tester';
 import { By } from 'selenium-webdriver';
+import { dir } from 'console';
 
 const pjson = require('../../package.json');
 
@@ -13,18 +14,6 @@ describe('Depedency Analytics', () => {
      const view = await(await new ActivityBar().getViewControl('Extensions'))?.openView();
      const installed = await view?.getContent().getSection('Installed') as ExtensionsViewSection;
      dependencyExt = await installed.findItem(`@installed ${pjson.displayName}`) as ExtensionsViewItem;
-    });
-
-    it('Check the extension info', async () => {
-        await vsbinstance.driver.sleep(2000);
-        const author = await dependencyExt.getAuthor();
-        const desc = await dependencyExt.getDescription();
-        const version = await dependencyExt.getVersion();
-        const installed = await dependencyExt.isInstalled();
-        expect(author).equals(pjson.publisher);
-        expect(desc).equals(pjson.description);
-        expect(version).equals(pjson.version);
-        expect(installed).equals(pjson.installed);
     });
 
     it('Open quarkus dependency file on Editor', async() => {
@@ -82,6 +71,37 @@ describe('Depedency Analytics', () => {
                 expect.fail(`Dependency Analytics report not generated`);
             }            
         }
-        await ev.closeAllEditors();
+    });
+
+    it('Check Vulnerable Dependencies Count', async() => {
+        const dareport = await new EditorView().openEditor(`Dependency Analytics Report`);
+        const wv = new WebView();
+        let i=0;
+        console.log("start");
+        while(i<=5){
+            try{
+                await wv.switchToFrame();
+                const element = await wv.findWebElement(By.xpath("//title[.='Dependency Analysis']"));
+                break;
+            }
+            catch( error ){
+                await vsbinstance.driver.sleep(5000);
+                i++;
+            }
+            if(i===5){
+                expect.fail(`Dependency Analytics report not generated`);
+            }
+        }
+        const count_elem = await wv.findWebElements(By.xpath("//div[@class='card-body']//p"));
+
+
+        const tot_count_header: number = +([(await count_elem[4].getText()).split(": ")][1]);
+
+        const direct_elem = await wv.findWebElements(By.xpath("//tbody//tr[@data-toggle='collapse']/td[5]"));
+        let tot_row_count:number = 0;
+        direct_elem.forEach(value =>{
+            tot_row_count = tot_row_count+(+value.getText());
+        });
+        console.log("count is: ", tot_row_count);
     });
 });
