@@ -77,7 +77,6 @@ describe('Depedency Analytics', () => {
         const dareport = await new EditorView().openEditor(`Dependency Analytics Report`);
         const wv = new WebView();
         let i=0;
-        console.log("start");
         while(i<=5){
             try{
                 await wv.switchToFrame();
@@ -92,16 +91,20 @@ describe('Depedency Analytics', () => {
                 expect.fail(`Dependency Analytics report not generated`);
             }
         }
-        const count_elem = await wv.findWebElements(By.xpath("//div[@class='card-body']//p"));
-
-
-        const tot_count_header: number = +([(await count_elem[4].getText()).split(": ")][1]);
-
-        const direct_elem = await wv.findWebElements(By.xpath("//tbody//tr[@data-toggle='collapse']/td[5]"));
+        const count_elem = await wv.findWebElement(By.xpath("//div[@class='card-body']//p[contains(.,'Total Vulnerabilities')]"));
+        const textContent = await count_elem.getText();
+        const splitText = textContent.split(": ");
+        const tot_count_header: number = +splitText[1];
         let tot_row_count:number = 0;
-        direct_elem.forEach(value =>{
-            tot_row_count = tot_row_count+(+value.getText());
-        });
-        console.log("count is: ", tot_row_count);
+        for (i=4;i<=5;i++){
+            const direct_elem = await wv.findWebElements(By.xpath("//tbody//tr[@data-toggle='collapse']/td[" + i + "]"));
+            await Promise.all(direct_elem.map(async value => {
+                const temp: number = +await value.getText();
+                tot_row_count += temp;
+            }));
+        }
+        if (tot_count_header != tot_row_count){
+            expect.fail("Total Vulnerabilities count mismatches between header and sum of individual rows");
+        }
     });
 });

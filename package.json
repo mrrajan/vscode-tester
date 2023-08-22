@@ -17,7 +17,7 @@
 		"compile": "tsc -p ./",
 		"lint": "eslint src --ext .ts",
 		"watch": "tsc -watch -p ./",
-		"install-vsix": "extest install-vsix -f /home/rravi/RHTC/0620/vsix/fabric8-analytics-0.3.10-effective-pom.vsix --extensions_dir .test-extensions",
+		"install-vsix": "extest install-vsix -f ./.test-extensions/fabric8-analytics-0.3.10-2023-08-21.vsix --extensions_dir .test-extensions",
 		"ui-test": "extest setup-tests './out/ui-test/dependencyAnalytics.js --storage test-resources --code_settings settings.json --extensions_dir .test-extensions' && npm run install-vsix && extest run-tests  './out/ui-test/dependencyAnalytics.js' --code_settings settings.json --extensions_dir .test-extensions  --storage test-resources"
 	},
 	"devDependencies": {
