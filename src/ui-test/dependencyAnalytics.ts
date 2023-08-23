@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import * as path from 'path';
 import { ActivityBar, before, VSBrowser, ExtensionsViewItem, ExtensionsViewSection, EditorView, SideBarView, ViewItem, WebView} from 'vscode-extension-tester';
 import { By } from 'selenium-webdriver';
-import { dir } from 'console';
+import { TestUtils } from '../utils/testUtils';
 
 const pjson = require('../../package.json');
 
@@ -19,11 +19,11 @@ describe('Depedency Analytics', () => {
     it('Open quarkus dependency file on Editor', async() => {
         vsbinstance.openResources(path.join('src', 'ui-test', 'resources', 'test'));
         await vsbinstance.driver.sleep(2000);
-        const display = await vsbinstance.driver.findElement(By.xpath(`//a/span[.='pom.xml']`)).isDisplayed();
+        const display = await vsbinstance.driver.findElement(By.xpath(TestUtils.lnkPomXml)).isDisplayed();
         expect(display).equals(true);
-        await vsbinstance.driver.findElement(By.xpath(`//a/span[.='pom.xml']`)).click();
+        await vsbinstance.driver.findElement(By.xpath(TestUtils.lnkPomXml)).click();
         await vsbinstance.driver.sleep(2000);
-        const pom = await vsbinstance.driver.findElement(By.xpath(`//div[contains(@class,"tabs-breadcrumbs")]//a[.="pom.xml"]`)).isDisplayed();
+        const pom = await vsbinstance.driver.findElement(By.xpath(TestUtils.tabPomXmlEditor)).isDisplayed();
         expect(pom).equals(true);
     });
 
@@ -80,7 +80,7 @@ describe('Depedency Analytics', () => {
         while(i<=5){
             try{
                 await wv.switchToFrame();
-                const element = await wv.findWebElement(By.xpath("//title[.='Dependency Analysis']"));
+                const element = await wv.findWebElement(By.xpath(TestUtils.titleDepAnalytics));
                 break;
             }
             catch( error ){
@@ -91,18 +91,19 @@ describe('Depedency Analytics', () => {
                 expect.fail(`Dependency Analytics report not generated`);
             }
         }
-        const count_elem = await wv.findWebElement(By.xpath("//div[@class='card-body']//p[contains(.,'Total Vulnerabilities')]"));
+        const count_elem = await wv.findWebElement(By.xpath(TestUtils.txtTotalVuln));
         const textContent = await count_elem.getText();
         const splitText = textContent.split(": ");
         const tot_count_header: number = +splitText[1];
         let tot_row_count:number = 0;
-        for (i=4;i<=5;i++){
-            const direct_elem = await wv.findWebElements(By.xpath("//tbody//tr[@data-toggle='collapse']/td[" + i + "]"));
+        for (let i=4;i<=5;i++){
+            const direct_elem = await wv.findWebElements(By.xpath(TestUtils.txtVulnRowCount.replace("<<index>>",i.toString())));
             await Promise.all(direct_elem.map(async value => {
                 const temp: number = +await value.getText();
                 tot_row_count += temp;
-            }));
-        }
+            }));   
+        }      
+          
         if (tot_count_header != tot_row_count){
             expect.fail("Total Vulnerabilities count mismatches between header and sum of individual rows");
         }
