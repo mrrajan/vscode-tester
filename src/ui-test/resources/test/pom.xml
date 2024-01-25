@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.5.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-oidc</artifactId>
-			<version>2.13.8.Final-redhat-00006</version>
+			<version>3.6.6</version>
 		</dependency>
 		<dependency> <!--exhortignore-->
 			<groupId>org.keycloak</groupId>
@@ -141,7 +141,7 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-grpc</artifactId>
-			<version>3.2.0.Final</version>
+			<version>3.6.6</version>
 		</dependency>
 	
 		<dependency>
@@ -180,7 +180,7 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-keycloak-authorization</artifactId>
-			<version>2.13.7.Final</version>
+			<version>3.6.6</version>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
