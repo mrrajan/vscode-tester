@@ -62,6 +62,15 @@ describe('Red Hat Depedency Analytics Report VSCode Extension Validation', () =>
 
     it('Open Report',async()=>{
         const editor:EditorView = await generate_report_editor_view();
+        const view = new WebView();
+        view.switchToFrame();
+        const element = await view.findWebElement(By.className('pf-v5-c-title'));
+        const title = await element.getText();
+        console.log(`Title of the page is - ${title}`);
+        expect(title).has.string('Red Hat Overview of security Issues');
+
+        await testUtils.sleep(10000);
+        /*const editor:EditorView = await generate_report_editor_view();
         const driv = editor.getDriver();
         const wv = new WebView();
         wv.switchToFrame();
@@ -82,9 +91,9 @@ describe('Red Hat Depedency Analytics Report VSCode Extension Validation', () =>
         console.log("switched to second");
         console.log(await iframe1.findElement(By.xpath("//title")).getText());
         console.log(await driv.getTitle());
-        await testUtils.sleep(10000);
+        await testUtils.sleep(10000);*/
     });
-
+/*
     it('Generate Dependency Analytics Report From Editor View', async() => {
         await generate_report_editor_view();
         await (new EditorView).closeAllEditors();   
@@ -111,6 +120,6 @@ describe('Red Hat Depedency Analytics Report VSCode Extension Validation', () =>
             expect.fail(`Dependency Analytics report not generated`);
         } 
     });
-
+*/
     
 });
