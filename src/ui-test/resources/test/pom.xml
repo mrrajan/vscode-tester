@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.5.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
@@ -38,12 +38,12 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-resteasy</artifactId>
-			<version>2.13.8.Final-redhat-00006</version>
+			<version>3.0.1.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-oidc</artifactId>
-			<version>2.13.8.Final-redhat-00006</version>
+			<version>3.0.0.Final</version>
 		</dependency>
 		<dependency> <!--exhortignore-->
 			<groupId>org.keycloak</groupId>
