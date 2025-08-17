@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.5.RELEASE</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
@@ -43,7 +43,7 @@
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-oidc</artifactId>
-			<version>2.13.8.Final-redhat-00006</version>
+			<version>3.17.5</version>
 		</dependency>
 		<dependency> <!--exhortignore-->
 			<groupId>org.keycloak</groupId>
@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>org.keycloak</groupId>
 			<artifactId>keycloak-core</artifactId>
-			<version>16.1.0</version>
+			<version>19.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -100,7 +100,7 @@
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-web</artifactId>
-			<version>4.3.7</version>
+			<version>4.5.18</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -115,12 +115,12 @@
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>
 			<artifactId>tomcat-catalina</artifactId>
-			<version>11.0.0-M10</version>
+			<version>11.0.10</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-core</artifactId>
-			<version>10.1.0</version>
+			<version>10.1.44</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -175,12 +175,12 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-codec-http2</artifactId>
-			<version>4.1.99.Final</version>
+			<version>4.1.124.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
 			<artifactId>quarkus-keycloak-authorization</artifactId>
-			<version>2.13.7.Final</version>
+			<version>3.2.5.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>io.quarkus</groupId>
